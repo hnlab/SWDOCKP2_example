@@ -1,43 +1,63 @@
-# Numerical example of SWDOCKP2
-This repository is a computational example to demonstrate the docking efficiency of $SWDOCKP^{2}$ , includes docking 296 db2 hierarchies against four conformations of SARS-Cov-2 Main Protease (PDB: 5RFE, 5RHB, 7AR5, 7GF2).
+# SWDOCKP2 x86 Example
+## 1. Introduction
+This repository contains a `SWDOCKP2` computational example for docking 296 db2 hierarchies against four conformations of SARS-CoV-2 Main Protease (PDB IDs: 5RFE, 5RHB, 7AR5, 7GF2) on x86 platforms.
 
-The ligand db2 files are provided in transposed `.xz` format as described in [1]. The raw and optimized db2 (by sorting and merging confs) are named as `xaaaaaa.000.block.xz` and `xaaaaaa.000.db2.gz.opt.block.xz` respectively.
+The four target conformations can be downloaded from www.rcsb.org for visualization purposes. The pre-generated scoring grids and matching spheres are stored in the `dockfiles` directory.
 
-The `swdockp2_v4` and `swdockp2_v8` correspond to the four-target (`v4`) and eight-target (`v8`) version respectively. Examples are provided for both versions. If your ensemble consists of less than four conformations, the four-target version is more recommended due to its higher efficiency and less waste of memory. 
+The ligand db2 files are provided in transposed `.xz` format, as described in [1]. The raw db2 files and the optimized ones (after sorting and merging conformations) are named `xaaaaaa.000.block.xz` and `xaaaaaa.000.db2.gz.opt.block.xz`, respectively.
 
+Two x86 versions of `SWDOCKP2` are available: a four-target (`swdockp2_v4`) and an eight-target (`swdockp2_v8`) version, named based on the maximum number of targets supported for parallel processing. Examples for both versions are included. When your target ensemble contains four or fewer targets, the `v4` version is recommended due to its higher processing efficiency and lower memory consumption.
 
-## Usage
-Usage of both versions resemble each other. Here we take `swdockp2_v4` as instance.
+## 2. Usage of SWDOCKP2 x86
+The usage of both versions is similar. Below, the `v4` version is used as an example for demonstration.
 
-First change to the `v4` working directory:
+### 2.1 Prerequisites
+- `glibc` >= `2.28`
+- `mpich` >= `4.2.0`
+
+### 2.2 Run SWDOCKP2
+Change to the `v4` working directory:
 ```bash
 cd docking/v4
 ```
 Then execute the script `run_dock.sh` to start docking, whose content is: 
 ```bash
-ulimit -s unlimited 
+#!/bin/bash
+lib_path=$(readlink -f ../../lib)
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$lib_path # Linking required dynamic libraries
 export OMP_NUM_THREADS=${num_threads}
+
+ulimit -s unlimited # unlimit the stack usage (recommended)
 mpirun -np ${num_proc} ../../bin/swdockp2_v4
 ```
-> The program consumes up to 4 GB of stack memory in our test examples, thus it is recommended to set `ulimit -s unlimited` to allow for more stack usage.
+Users can configure the number of MPI processes (specified by `${num_proc}`) and threads (specified by `${num_threads}`) based on the available computing resources.
 
-> ATTENTION: `${num_threads}` should be 1, 4, 16 or 64. Any number that is not to the power of 4 or larger than 64 will lead to unexpected errors. 
+In our testing scenario with 16 threads on a single MPI process, the program may consume up to approximately 4 GB of stack memory. To prevent segmentation faults, it is advisable to execute the `ulimit -s unlimited` command to remove stack size restrictions.
 
-## Input and Output details
-### Input files
-Required input files in the working directory are listed as follows.
+**Important Note:** The value of `${num_threads}` should be set to **1, 4, 16, or 64**. Using a value that is not a power of 4 or exceeds 64 may result in unanticipated errors.
+
+## 3. Input and Output
+### 3.1 Input
+The working directory should include the following input files:
 
 | Filename | Content |
 | -------- | ------- |
-| INDOCK | Docking parameters, including the path to all the energy grids and matching spheres. |
-| split_database_index | Paths to all the input db2 `.xz` files. One path per line. |
-| split_database_nums | Number of blocks of all the input db2 `.xz` files. One number per line, in accordance with `split_database_index`. |
+| `INDOCK` | Docking parameters, which encompass the paths to all energy grids and matching spheres. |
+| `split_database_index` | Paths to all input db2 `.xz` files. Each line contains a single file path. |
+| `split_database_nums` | The number of blocks for each input db2 `.xz` file. Each line should contain a single number, corresponding to the file paths in split_database_index in the same order. You can use the command `xz -l <path/to/your/xz>` to determine the number of blocks in any `.xz` file. |
 
-## Output files
+### 3.2 Output
 | Filename | Content |
 | -------- | ------- |
-| xOUTDOCK | The docking scores output by process x. |
-| xmpro_rec_y.mol2.gz | The docking poses for target y output by process x. |
+| `xOUTDOCK` | Docking scores generated by process *x*. |
+| `xmpro_rec_y.mol2.gz` | Docking poses in the `.mol2` format for target *y*, produced by process *x*. The order of these poses corresponds to that in `xOUTDOCK`. |
 
+## 4. Performance Assessment
+The processing time is output to both `xOUTDOCK` and the standard output (`stdout`).
 
-## Reference
+When multiple MPI processes are utilized, the time cost of each process may vary because of the task allocation strategy employed by `SWDOCKP2`. The specific wall time for process *x* is presented at the end of the `xOUTDOCK` file, followed by the total elapsed time for all processes to termicate.
+
+The time taken for loading ligands, performing minimization, and the entire searching procedure for all processes is printed to `stdout` in the order in which the processes terminate.
+
+## 5. Reference
+[1] Xu, K., Zhang, J., Duan, X., Wan, X., Huang, N., Schmidt, B., Liu, W., & Yang, G. (2022). Redesigning and Optimizing UCSF DOCK3.7 on Sunway TaihuLight. IEEE Transactions on Parallel and Distributed Systems, 33(12), 4458–4471. https://doi.org/10.1109/TPDS.2022.3194916
