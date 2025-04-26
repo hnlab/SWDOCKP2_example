@@ -1,4 +1,4 @@
-# Numerical example of $ SWDOCKP^{2} $
+# Numerical example of SWDOCKP2
 This repository is a computational example to demonstrate the docking efficiency of $SWDOCKP^{2}$ , includes docking 296 db2 hierarchies against four conformations of SARS-Cov-2 Main Protease (PDB: 5RFE, 5RHB, 7AR5, 7GF2).
 
 The ligand db2 files are provided in transposed `.xz` format as described in [1]. The raw and optimized db2 (by sorting and merging confs) are named as `xaaaaaa.000.block.xz` and `xaaaaaa.000.db2.gz.opt.block.xz` respectively.
