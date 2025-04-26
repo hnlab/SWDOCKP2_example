@@ -6,7 +6,7 @@ The four target conformations can be downloaded from www.rcsb.org for visualizat
 
 The ligand db2 files are provided in transposed `.xz` format, as described in [1]. The raw db2 files and the optimized ones (after sorting and merging conformations) are named `xaaaaaa.000.block.xz` and `xaaaaaa.000.db2.gz.opt.block.xz`, respectively.
 
-Two x86 versions of `SWDOCKP2` are available: a four-target (`swdockp2_v4`) and an eight-target (`swdockp2_v8`) version, named based on the maximum number of targets supported for parallel processing. Examples for both versions are included. When your target ensemble contains four or fewer targets, the `v4` version is recommended due to its higher processing efficiency and lower memory consumption.
+Two x86 versions of `SWDOCKP2` are available: a four-target (`swdockp2_v4`) and an eight-target (`swdockp2_v8`) version, named based on the maximum number of targets supported for parallel processing. Examples for both versions are included.
 
 ## 2. Usage of SWDOCKP2 x86
 The usage of both versions is similar. Below, the `v4` version is used as an example for demonstration.
