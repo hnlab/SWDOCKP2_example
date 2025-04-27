@@ -23,18 +23,21 @@ cd docking/v4
 Then execute the script `run_dock.sh` to start docking, whose content is: 
 ```bash
 #!/bin/bash
+num_threads=16
+num_proc=1
+
 lib_path=$(readlink -f ../../lib)
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$lib_path # Linking required dynamic libraries
-export OMP_NUM_THREADS=${num_threads}
+export OMP_NUM_THREADS=$num_threads
 
 ulimit -s unlimited # unlimit the stack usage (recommended)
-mpirun -np ${num_proc} ../../bin/swdockp2_v4
+mpirun -np $num_proc ../../bin/swdockp2_v4
 ```
-Users can configure the number of MPI processes (specified by `${num_proc}`) and threads (specified by `${num_threads}`) based on the available computing resources.
+Users can configure the number of MPI processes (specified by `$num_proc`) and threads (specified by `$num_threads`) based on the available computing resources.
 
-In our testing scenario with 16 threads on a single MPI process, the program may consume up to approximately 4 GB of stack memory. To prevent segmentation faults, it is advisable to execute the `ulimit -s unlimited` command to remove stack size restrictions.
+In our testing scenario with 16 threads on a single MPI process, the stack consumption exceeded 8192 kB. Thus to prevent segmentation faults, it is advisable to execute the `ulimit -s unlimited` command to remove stack size restrictions.
 
-**Important Note:** The value of `${num_threads}` should be set to **1, 4, 16, or 64**. Using a value that is not a power of 4 or exceeds 64 may result in unanticipated errors.
+**Important Note:** The value of `$num_threads` should be set to **1, 4, 16, or 64**. Using a value that is not a power of 4 or exceeds 64 may result in unanticipated errors.
 
 ## 3. Input and Output
 ### 3.1 Input
