@@ -121,36 +121,36 @@ bumpmap_file                  ../../dockfiles/4_7GF2/vdw.bmp
 rec_number                    5
 rec_group                     1
 rec_group_option              1
-solvmap_file                  ../../dockfiles/5_5RFE/ligand.desolv.heavy
-hydrogen_solvmap_file         ../../dockfiles/5_5RFE/ligand.desolv.hydrogen
-delphi_file                   ../../dockfiles/5_5RFE/trim.electrostatics.phi
-chemgrid_file                 ../../dockfiles/5_5RFE/vdw.vdw
-bumpmap_file                  ../../dockfiles/5_5RFE/vdw.bmp
+solvmap_file                  ../../dockfiles/1_5RFE/ligand.desolv.heavy
+hydrogen_solvmap_file         ../../dockfiles/1_5RFE/ligand.desolv.hydrogen
+delphi_file                   ../../dockfiles/1_5RFE/trim.electrostatics.phi
+chemgrid_file                 ../../dockfiles/1_5RFE/vdw.vdw
+bumpmap_file                  ../../dockfiles/1_5RFE/vdw.bmp
 ############## grids/data for one receptor
 rec_number                    6
 rec_group                     1
 rec_group_option              1
-solvmap_file                  ../../dockfiles/6_5RHB/ligand.desolv.heavy
-hydrogen_solvmap_file         ../../dockfiles/6_5RHB/ligand.desolv.hydrogen
-delphi_file                   ../../dockfiles/6_5RHB/trim.electrostatics.phi
-chemgrid_file                 ../../dockfiles/6_5RHB/vdw.vdw
-bumpmap_file                  ../../dockfiles/6_5RHB/vdw.bmp
+solvmap_file                  ../../dockfiles/2_5RHB/ligand.desolv.heavy
+hydrogen_solvmap_file         ../../dockfiles/2_5RHB/ligand.desolv.hydrogen
+delphi_file                   ../../dockfiles/2_5RHB/trim.electrostatics.phi
+chemgrid_file                 ../../dockfiles/2_5RHB/vdw.vdw
+bumpmap_file                  ../../dockfiles/2_5RHB/vdw.bmp
 ############## grids/data for one receptor
 rec_number                    7
 rec_group                     1
 rec_group_option              1
-solvmap_file                  ../../dockfiles/7_7AR5/ligand.desolv.heavy
-hydrogen_solvmap_file         ../../dockfiles/7_7AR5/ligand.desolv.hydrogen
-delphi_file                   ../../dockfiles/7_7AR5/trim.electrostatics.phi
-chemgrid_file                 ../../dockfiles/7_7AR5/vdw.vdw
-bumpmap_file                  ../../dockfiles/7_7AR5/vdw.bmp
+solvmap_file                  ../../dockfiles/3_7AR5/ligand.desolv.heavy
+hydrogen_solvmap_file         ../../dockfiles/3_7AR5/ligand.desolv.hydrogen
+delphi_file                   ../../dockfiles/3_7AR5/trim.electrostatics.phi
+chemgrid_file                 ../../dockfiles/3_7AR5/vdw.vdw
+bumpmap_file                  ../../dockfiles/3_7AR5/vdw.bmp
 ############## grids/data for one receptor
 rec_number                    8
 rec_group                     1
 rec_group_option              1
-solvmap_file                  ../../dockfiles/8_7GF2/ligand.desolv.heavy
-hydrogen_solvmap_file         ../../dockfiles/8_7GF2/ligand.desolv.hydrogen
-delphi_file                   ../../dockfiles/8_7GF2/trim.electrostatics.phi
-chemgrid_file                 ../../dockfiles/8_7GF2/vdw.vdw
-bumpmap_file                  ../../dockfiles/8_7GF2/vdw.bmp
+solvmap_file                  ../../dockfiles/4_7GF2/ligand.desolv.heavy
+hydrogen_solvmap_file         ../../dockfiles/4_7GF2/ligand.desolv.hydrogen
+delphi_file                   ../../dockfiles/4_7GF2/trim.electrostatics.phi
+chemgrid_file                 ../../dockfiles/4_7GF2/vdw.vdw
+bumpmap_file                  ../../dockfiles/4_7GF2/vdw.bmp
 ############## end of INDOCK
